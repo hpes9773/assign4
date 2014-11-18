@@ -45,7 +45,11 @@ void draw() {
 
   case GAME_START:
     /*---------Print Text-------------*/
-    text("press enter", 320, 240); // replace this with printText
+     fill(95, 194, 226);
+     textSize(40);
+     text( "GALIXIAN" , 240 , 240 );
+     textSize(20);
+     text("Press ENTER to Start" , 240 , 280);// replace this with printText
     /*--------------------------------*/
     break;
 
@@ -71,13 +75,21 @@ void draw() {
 
   case GAME_PAUSE:
     /*---------Print Text-------------*/
-
+     fill(95, 194, 226);
+     textSize(40);
+     text( "PAUSE" , 320 , 240 );
+     textSize(20);
+     text("Press ENTER to Resume" , 320 , 280);
     /*--------------------------------*/
     break;
 
   case GAME_WIN:
     /*---------Print Text-------------*/
-
+     fill(95, 194, 226);
+     textSize(40);
+     text( "WINNER" , 300 , 240 );
+     textSize(20);
+     text("SCORE:" , 320 , 280);
     /*--------------------------------*/
     winAnimate();
     break;
@@ -85,7 +97,11 @@ void draw() {
   case GAME_LOSE:
     loseAnimate();
     /*---------Print Text-------------*/
-
+     fill(95, 194, 226);
+     textSize(40);
+     text( "BOOOM" , 320 , 240 );
+     textSize(20);
+     text("You are dead!!" , 320 , 280);
     /*--------------------------------*/
     break;
   }
@@ -115,13 +131,39 @@ void keyPressed() {
 
 /*---------Make Alien Function-------------*/
 void alienMaker() {
-  aList[0]= new Alien(50, 50);
+ int i = 0;
+  for (int col = 0; col < 12; col++){
+  for (int row =0; row < 4; row++){
+    int x = 50+ col * 40;
+    int y = 50 + row * 50;
+    aList[i] = new Alien (x , y);
+    i++;
+    if (i>53){
+      break;
+    }
+  }  
+  }
+  for (int col = 0; col < 5; col++){
+  for (int row =0; row < 1; row++){
+    int x = 50+ col * 40;
+    int y = 250 + row * 50;
+    aList[i] = new Alien (x , y);
+    i++;
+    if (i>5){
+      break;
+    }
+  }  
+  }
+
 }
 
 void drawLife() {
   fill(230, 74, 96);
   text("LIFE:", 36, 455);
   /*---------Draw Ship Life---------*/
+  ellipse(78,459,15,15);
+  ellipse(103,459,15,15);
+  ellipse(128,459,15,15);
 }
 
 void drawBullet() {
@@ -315,6 +357,14 @@ void statusCtrl() {
     case GAME_START:
       status = GAME_PLAYING;
       break;
+      
+    case GAME_PLAYING:
+      status = GAME_PAUSE;
+      break;
+      
+    case GAME_PAUSE:
+      status = GAME_PLAYING;
+      break;
 
       /*-----------add things here--------*/
 
@@ -343,4 +393,3 @@ void cheatKeys() {
     }
   }
 }
-
